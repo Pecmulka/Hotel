@@ -30,24 +30,18 @@ sudo apt install python3 python3-pip
 git clone https://github.com/Pecmulka/Hotel.git
 ```
 
-2. Перейдите в папку проекта
-
-```bash
-cd hotel_business
-```
-
-3. Установите зависимости
+2. Установите зависимости
 ```bash
 pip install django psycopg2-binary 
 ```
 
-4. Примените миграции
+3. Примените миграции
 
 ```bash
 python manage.py migrate
 ```
 
-5. Запустите сервер
+4. Запустите сервер
 
 ```bash
 python manage.py runserver
