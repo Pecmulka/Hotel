@@ -16,7 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.shortcuts import redirect
+from hotel import views
+
+def root_redirect(request):
+    return redirect('login')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', root_redirect, name='root'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('home/', views.home_view, name ='home'),
+    path('services/', views.services_view, name='services'),
+    path('guest-services/', views.guest_services_view, name='guest_services'),
 ]

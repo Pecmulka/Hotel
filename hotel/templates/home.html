@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/css/uikit.min.css" />
+</head>
+<body>
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="#">Гостиница</a>
+        </div>
+        <div class="uk-navbar-right">
+            <span class="uk-margin-right">Добро пожаловать, {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="uk-button uk-button-default">Выйти</a>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-top">
+        <h1>Главная страница</h1>
+        <p>Вы успешно авторизовались в системе.</p>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/js/uikit-icons.min.js"></script>
+</body>
+</html>

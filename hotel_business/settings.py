@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+AUTH_USER_MODEL = 'hotel.CustomUser'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'hotel_business.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "Hotel",
+        'NAME': "Hotel2",
         'USER': "postgres",
         'PASSWORD': "",
         'HOST': "localhost",
@@ -85,6 +86,9 @@ DATABASES = {
     }
 }
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

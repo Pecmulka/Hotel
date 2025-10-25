@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/css/uikit.min.css" />
+</head>
+<body>
+    <div class="uk-container uk-container-small uk-margin-large-top">
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m uk-align-center">
+            <h2 class="uk-card-title uk-text-center">Авторизация</h2>
+
+            {% if error %}
+            <div class="uk-alert-danger" uk-alert>
+                <p>{{ error }}</p>
+            </div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="username">Логин:</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" id="username" name="username" required>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="password">Пароль:</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="password" id="password" name="password" required>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-primary uk-width-1-1" type="submit">Войти</button>
+                </div>
+            </form>
+
+            <div class="uk-text-center">
+                <a href="{% url 'guest_services' %}" class="uk-link">Продолжить как гость</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/js/uikit-icons.min.js"></script>
+</body>
+</html>
