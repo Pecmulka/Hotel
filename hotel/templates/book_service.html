@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись на услугу - Панель менеджера</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/css/uikit.min.css" />
+</head>
+<body>
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="{% url 'home' %}">Гостиница</a>
+            <ul class="uk-navbar-nav">
+                <li><a href="{% url 'manager_clients' %}">Клиенты</a></li>
+                <li><a href="{% url 'services' %}">Услуги</a></li>
+                <li><a href="{% url 'manager_rooms' %}">Номера</a></li>
+                <li class="uk-active"><a href="{% url 'manager_book_service' %}">Запись на услугу</a></li>
+            </ul>
+        </div>
+        <div class="uk-navbar-right">
+            <span class="uk-margin-right">Менеджер: {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="uk-button uk-button-default">Выйти</a>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-top">
+        <h1>Запись клиента на услугу</h1>
+
+        <form method="post" class="uk-form-stacked">
+            {% csrf_token %}
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="booking_id">Бронь:</label>
+                <div class="uk-form-controls">
+                    <select class="uk-select" id="booking_id" name="booking_id" required>
+                        <option value="">Выберите бронь</option>
+                        {% for booking in bookings %}
+                        <option value="{{ booking.id }}">Бронь {{ booking.id }} - {{ booking.client.fio }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="service_id">Услуга:</label>
+                <div class="uk-form-controls">
+                    <select class="uk-select" id="service_id" name="service_id" required>
+                        <option value="">Выберите услугу</option>
+                        {% for service in services %}
+                        <option value="{{ service.id }}">{{ service.name }} - {{ service.price }} руб.</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="count">Количество:</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" type="number" id="count" name="count" value="1" min="1" required>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="date">Дата оказания услуги:</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" type="date" id="date" name="date" required>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <button class="uk-button uk-button-primary" type="submit">Записать на услугу</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/js/uikit-icons.min.js"></script>
+</body>
+</html>
