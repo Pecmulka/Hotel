@@ -28,5 +28,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('home/', views.home_view, name ='home'),
     path('services/', views.services_view, name='services'),
-    path('guest-services/', views.guest_services_view, name='guest_services'),
+    path('clients/', views.manager_clients_view, name='manager_clients'),
+    path('rooms/', views.manager_rooms_view, name='manager_rooms'),
+    path('book-service/', views.manager_book_service_view, name='manager_book_service'),
 ]

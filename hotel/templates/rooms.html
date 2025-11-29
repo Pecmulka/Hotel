@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Номера - Панель менеджера</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/css/uikit.min.css" />
+</head>
+<body>
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="{% url 'home' %}">Гостиница</a>
+            <ul class="uk-navbar-nav">
+                <li><a href="{% url 'manager_clients' %}">Клиенты</a></li>
+                <li><a href="{% url 'services' %}">Услуги</a></li>
+                <li class="uk-active"><a href="{% url 'manager_rooms' %}">Номера</a></li>
+                <li><a href="{% url 'manager_book_service' %}">Запись на услугу</a></li>
+            </ul>
+        </div>
+        <div class="uk-navbar-right">
+            <span class="uk-margin-right">Менеджер: {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="uk-button uk-button-default">Выйти</a>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-top">
+        <h1>Номерной фонд</h1>
+
+        <!-- Фильтры -->
+        <form class="uk-grid-small uk-margin-bottom" uk-grid method="get">
+            <div class="uk-width-1-4@s">
+                <label class="uk-form-label">Количество спальных мест:</label>
+                <select class="uk-select" name="bed_count">
+                    <option value="">Все</option>
+                    <option value="1" {% if current_bed_count == "1" %}selected{% endif %}>1</option>
+                    <option value="2" {% if current_bed_count == "2" %}selected{% endif %}>2</option>
+                    <option value="3" {% if current_bed_count == "3" %}selected{% endif %}>3</option>
+                    <option value="4" {% if current_bed_count == "4" %}selected{% endif %}>4</option>
+                </select>
+            </div>
+            <div class="uk-width-1-4@s">
+                <label class="uk-form-label">Категория:</label>
+                <select class="uk-select" name="category_id">
+                    <option value="">Все категории</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}" {% if current_category_id == category.id|stringformat:"s" %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="uk-width-1-4@s">
+                <button class="uk-button uk-button-primary uk-margin-top" type="submit">Применить фильтры</button>
+            </div>
+            <div class="uk-width-1-4@s">
+                <a href="{% url 'manager_rooms' %}" class="uk-button uk-button-default uk-margin-top">Сбросить фильтры</a>
+            </div>
+        </form>
+
+        <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
+            {% for room in rooms %}
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title">Номер {{ room.id }}</h3>
+                    <p><strong>Категория:</strong> {{ room.category.name }}</p>
+                    <p><strong>Этаж:</strong> {{ room.floor }}</p>
+                    <p><strong>Комнат:</strong> {{ room.room_count }}</p>
+                    <p><strong>Спальных мест:</strong> {{ room.bed_count }}</p>
+                    <p><strong>Цена:</strong> {{ room.category.price }} руб./ночь</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="uk-width-1-1">
+                <div class="uk-alert-warning" uk-alert>
+                    <p>Номера не найдены</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/js/uikit-icons.min.js"></script>
+</body>
+</html>
