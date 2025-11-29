@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клиенты - Панель менеджера</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/css/uikit.min.css" />
+</head>
+<body>
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="{% url 'home' %}">Гостиница</a>
+            <ul class="uk-navbar-nav">
+                <li><a href="{% url 'manager_clients' %}">Клиенты</a></li>
+                <li><a href="{% url 'services' %}">Услуги</a></li>
+                <li><a href="{% url 'manager_rooms' %}">Номера</a></li>
+                <li><a href="{% url 'manager_book_service' %}">Запись на услугу</a></li>
+            </ul>
+        </div>
+        <div class="uk-navbar-right">
+            <span class="uk-margin-right">Менеджер: {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="uk-button uk-button-default">Выйти</a>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-top">
+        <h1>Список клиентов</h1>
+
+        <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
+            {% for client in clients %}
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title">{{ client.fio }}</h3>
+                    <p><strong>Телефон:</strong> {{ client.numbers }}</p>
+                    <p><strong>Дата рождения:</strong> {{ client.date_of_birth }}</p>
+                    <p><strong>Скидка:</strong> {{ client.discount }}%</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="uk-width-1-1">
+                <div class="uk-alert-warning" uk-alert>
+                    <p>Клиенты не найдены</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/js/uikit-icons.min.js"></script>
+</body>
+</html>
