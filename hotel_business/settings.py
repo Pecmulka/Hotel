@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-AUTH_USER_MODEL = 'hotel.CustomUser'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -78,7 +77,7 @@ WSGI_APPLICATION = 'hotel_business.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "Hotel2",
+        'NAME': "Hotel3",
         'USER': "postgres",
         'PASSWORD': "",
         'HOST': "localhost",
